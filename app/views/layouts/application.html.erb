@@ -23,9 +23,19 @@
   </head>
 
   <body>
-		<%# ヘッダー・フッターなど共通で表示させるセクションを記入=>レイアウトです %>
-		<%# 全てのページに「レイアウトです」と表示される %>
-		<p>レイアウトです</p>
+		<%# ヘッダー・フッターなど共通で表示させるセクションを記入 %>
+		<%# ヘッダー %>
+		<header class="header">
+      <p class="header_pageTitle">新着記事</p>
+      <div class="dropdown">
+				<%# image_tag 'ファイル名(app/assets/imagesに保存)', class: 'クラス名' %>
+        <%= image_tag 'default-avatar.png', class: 'header_avatar dropbtn' %>
+        <div class="dropdown-content">
+          <a href="#">プロフィール</a>
+          <a href="#">ログアウト</a>
+        </div>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
