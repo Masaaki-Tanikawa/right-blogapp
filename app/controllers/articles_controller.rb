@@ -6,4 +6,8 @@ class ArticlesController < ApplicationController
 	def show
 		@article = Article.find(params[:id]) #Articleのidを取得する
 	end
+
+	def new
+		@article = Article.new #空のArticleインスタンスを作成する
+	end
 end
