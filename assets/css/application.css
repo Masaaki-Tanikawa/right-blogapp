@@ -1,5 +1,126 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #8AC542;
+  padding: 16px 16px;
+  font-weight: bold;
+}
+.header_pageTitle {
+  color: white;
+  line-height: 40px;
+  font-size: 22px;
+}
+.header_avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.dropbtn {
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  font-weight: normal;
+  display: none;
+  right: 0;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  color: #616161;
+}
+
+.dropdown-content a:hover {
+  background-color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.tabs {
+  display: flex;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  justify-content: space-around;
+}
+.tabs_item {
+  padding: 16px 0px;
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.tabs_item.active {
+  background-color: #8AC542;
+  color: white;
+}
+.tabs_item:hover {
+  opacity: 0.9;
+}
+
+.card {
+  background-color: white;
+  margin: 16px 0;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+.card_heart {
+  display: flex;
+}
+.card_heart img {
+  width: 16px;
+  height: 16px;
+}
+.card_heart span {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #8AC542;
+  line-height: 16px;
+}
+.card_detail {
+  padding-top: 12px;
+  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+}
+.card_detail img {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  margin-right: 8px;
+}
+.card_content {
+  padding: 16px 16px;
+}
+.card_image {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+.card_image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
 html {
-  word-spacing: 1px;
+  word-spacing: px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
