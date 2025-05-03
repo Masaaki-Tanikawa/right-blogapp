@@ -1,5 +1,9 @@
 class ArticlesController < ApplicationController
   def index
-    @article = Article.first # Articleモデルの最初の記事を取得して@articleに代入(インスタンス化)する
+    @articles = Article.all # Articleモデルのすべての記事を取得して@articles(複数取得するため@articleから変更)に代入(インスタンス化)する
   end
+
+	def show
+		@article = Article.find(params[:id]) #Articleのidを取得する
+	end
 end
