@@ -1,4 +1,12 @@
 <div class="container">
+	<%# エラーメッセージを配列で取得する %>
+	<ul>
+		<% @article.errors.full_messages.each do |message| %>
+		 <li><%= message %></li>
+		<% end %>
+	</ul>
+	<%# Title can't be blank,Content can't be blank のいずれか・両方が表示される%>
+
 	<%# articleモデルを更新するために、article_pathにPOSTリクエストを送る %>
 	<%= form_with(model: @article, url: articles_path,method: 'post',local: true) do |f| %>
 	<%# ラベルを自動生成%>

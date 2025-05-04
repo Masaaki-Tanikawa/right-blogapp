@@ -38,6 +38,14 @@
         </div>
       </div>
     </header>
+		<%# flashを有効にする %>
+		<% if flash.present? %>
+		<div class="flash">
+		<% flash.each do |key,value| %> <%# key:notice value:保存できました (articles_controller.rbより取得)%>
+		<div class="<%= key %>"><%= value %></div>
+		<% end %>
+		</div>
+		<% end %>
     <%= yield %>
   </body>
 </html>
