@@ -1,0 +1,31 @@
+<div class="container">
+	<%# エラーメッセージを配列で取得する %>
+	<ul>
+		<% @article.errors.full_messages.each do |message| %>
+		 <li><%= message %></li>
+		<% end %>
+	</ul>
+	<%# Title can't be blank,Content can't be blank のいずれか・両方が表示される%>
+
+	<%# articleモデルを更新するために、article_pathにPOSTリクエストを送る %>
+	<%= form_with(model: @article, url: articles_path,method: 'post',local: true) do |f| %>
+	<%# ラベルを自動生成%>
+	<%# ※(Articleモデルの)titleカラムに対応し「タイトル」と表示%>
+	<div>
+		<%= f.label :title,'タイトル' %>
+	</div>
+	<%# テキストフィールド(短い文字用)を自動生成 %>
+	<div>
+		<%= f.text_field :title, class: 'text' %>
+	</div>
+		<div>
+		<%= f.label :content,'内容' %>
+	</div>
+	<%# テキストエリア(長い文字用)を自動生成 %>
+	<div>
+		<%= f.text_area :content %>
+	</div>
+	<%# 送信ボタンを自動生成 %>
+	<%= f.submit '保存' , class: 'btn-primary'%>
+	<% end %>
+</div>

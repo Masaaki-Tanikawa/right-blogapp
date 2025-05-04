@@ -32,4 +32,11 @@
 	<% end %>
 	<% end %>
  	<%# データベース作成時に登録した記事1件とdb/seeds.rbのダミー記事：2件が表示される %>
+
+	<%# 新規作成ページへのリンクを作成（font-awesomeを使用） %>
+	<%= link_to new_article_path do %>
+    <div class="float_btn">
+      <i class="fa fa-plus"></i>
+    </div>
+  <% end %>
 </div>
