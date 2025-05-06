@@ -1,0 +1,24 @@
+<%# 編集画面を表示：app/views/articles/new.html.erbの内容を複製  %>
+<div class="container">
+	<ul>
+		<% @article.errors.full_messages.each do |message| %>
+		 <li><%= message %></li>
+		<% end %>
+	</ul>
+	<%# 編集対象のIDを取得できるようにurlとmethodを変更 ※../rails/info/routesを参照 %>
+	<%= form_with(model: @article, url: article_path(@article),method: 'put',local: true) do |f| %>
+	<div>
+		<%= f.label :title,'タイトル' %>
+	</div>
+	<div>
+		<%= f.text_field :title, class: 'text' %>
+	</div>
+		<div>
+		<%= f.label :content,'内容' %>
+	</div>
+	<div>
+		<%= f.text_area :content %>
+	</div>
+	<%= f.submit '保存' , class: 'btn-primary'%>
+	<% end %>
+</div>
