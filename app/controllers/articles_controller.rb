@@ -21,6 +21,20 @@ class ArticlesController < ApplicationController
 		end
 	end
 
+def edit
+	@article = Article.find(params[:id])
+end
+
+def update
+	@article = Article.find(params[:id])
+	if @article.update(article_params)
+		redirect_to article_path(@article), notice: '更新できました' #対象idの要素(titleと:content)を更新できたら、対象idの記事ページに移動
+	else
+		flash.now[:error] = '更新に失敗しました'
+		render :edit, status: :unprocessable_entity #更新に失敗したら、対象idの編集ページに移動
+	end
+end
+
 	private #Strong Parameterを書くときに入力
 	def article_params
 		params.require(:article).permit(:title, :content) #フォームから投稿されたデータより、:titleと:contentの情報を抜き取る
