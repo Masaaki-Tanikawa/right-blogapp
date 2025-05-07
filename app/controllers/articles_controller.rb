@@ -35,6 +35,12 @@ def update
 	end
 end
 
+def destroy
+	article = Article.find(params[:id]) #該当する記事IDの情報取得する
+	article.destroy! #destroyで削除、!で削除できなかった際に処理を停止（削除されないとアプリ側の原因のため）
+	redirect_to root_path, status: :see_other, notice: '削除に成功しました' #「削除に成功しました」と表示させ、一覧ページに戻る
+end
+
 	private #Strong Parameterを書くときに入力
 	def article_params
 		params.require(:article).permit(:title, :content) #フォームから投稿されたデータより、:titleと:contentの情報を抜き取る
