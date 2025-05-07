@@ -8,14 +8,16 @@
       <p>2020/4/16</p>
     </div>
 		<%# 編集ボタンを追加 %>
-		<div class="article_detail_actions">
-			<div class="dropdown">
-				<%= image_tag 'actions.svg', class: 'dropbtn' %>
-				<div class="dropdown-content mini">
-					<%= link_to '編集する', edit_article_path(@article) %>
-				</div>
-			</div>
-		</div>
+    <div class="article_detail_actions">
+      <div class="dropdown">
+        <%= image_tag 'actions.svg', class: 'dropbtn' %>
+        <div class="dropdown-content mini">
+          <%= link_to '編集する', edit_article_path(@article) %>
+					<%# 削除ボタンを追加 :link_toはデフォルトではGETリクエストになるため、HTTPメソッドを指定、削除前にアラートを表示%>
+					<%= link_to '削除する', article_path(@article), data: { turbo_method: 'delete', turbo_confirm: '本当に削除してもよろしいですか？' } %>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="article_content">
     <%= @article.content %>
