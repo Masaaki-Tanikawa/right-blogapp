@@ -28,7 +28,15 @@
 		<%# ヘッダー・フッターなど共通で表示させるセクションを記入 %>
 		<%# ヘッダー %>
 		<header class="header">
-      <p class="header_pageTitle">新着記事</p>
+			<div class="header_logos">
+				<%# 戻るボタンを実装 %>
+				<% if !current_page?(root_path) %> <%# root_path(記事一覧ページ)以外の場合、戻るボタンを表示 %>
+        	<%= link_to :back do %> <%# Rails独自の設定で、「前のURLに戻る」機能を実装 %>
+						<%= image_tag 'back.svg', class: 'header_back' %>
+        	<% end %>
+				<% end %>
+      	<p class="header_pageTitle">BlogApp</p>
+			</div>
       <div class="dropdown">
 				<%# image_tag 'ファイル名(app/assets/imagesに保存)', class: 'クラス名' %>
         <%= image_tag 'default-avatar.png', class: 'header_avatar dropbtn' %>
