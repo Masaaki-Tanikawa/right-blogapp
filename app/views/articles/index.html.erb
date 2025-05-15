@@ -1,35 +1,11 @@
 <div class="container">
-  <div class="tabs">
-    <div class="tabs_item active">
-      新着記事一覧
-    </div>
-    <div class="tabs_item">
-      タイムライン
-    </div>
-  </div>
- 	<%# 記事の一覧を表示 %>
+ 	<%# タブを部分テンプレートで読み込み %>
+	<%= render 'tabs' %>	<%# タブの内容が入力された部分テンプレート:_tabs.html.erbを読み込む %>
+
+
 	<% @articles.each do |article| %>
-	<%= link_to article_path(article) do %>
-  <div class="card">
-    <div class="card_image">
-      <%= image_tag 'eyecatch1.png' %>
-    </div>
-    <div class="card_content">
-			<div class="card_title"><%= article.title %></div>
-      <div class="card_heart">
-        <%= image_tag 'heart.svg' %>
-        <span>23</span>
-      </div>
-      <div class="card_detail">
-        <%= image_tag 'default-avatar.png' %>
-        <div>
-          <p>cohki0305</p>
-          <p><%= article.display_created_at %></p> <%# 記事の作成日を表示(国際規格・ja.ymlのデフォルト設定はapp/models/article.rbで実施) %>
-        </div>
-      </div>
-    </div>
-  </div>
-	<% end %>
+		<%# 記事の表示を部分テンプレートで読み込み %>
+		<%= render 'article', article: article %><%# article: articleで、部分テンプレート:_article.html.erbに値を渡して_article.html.erbを表示%>
 	<% end %>
  	<%# データベース作成時に登録した記事1件とdb/seeds.rbのダミー記事：2件が表示される %>
 
