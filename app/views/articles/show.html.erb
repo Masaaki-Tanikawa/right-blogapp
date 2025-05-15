@@ -6,6 +6,7 @@
     <div>
       <p>cohki0305</p>
       <p>2020/4/16</p>
+			<p><%= I18n.l(@article.created_at, format: :default) %></p> <%# 記事の作成日を表示(国際規格を設定・config/locales/ja.ymlのデフォルト設定を使用) %>
     </div>
 		<%# 編集ボタンを追加 %>
     <div class="article_detail_actions">
