@@ -57,6 +57,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  gem "html2haml"      # ERB → HAML 変換に必要
+  gem "haml-rails"     # Rakeタスク haml:replace_erbs を提供
+	#ターミナルで、bundle exec rake haml:erb2hamlを実行すると、erbのファイルをもとにhamlを一括で作成できる
 end
 
 group :test do
@@ -69,3 +73,6 @@ gem "dartsass-rails", "~> 0.5.1"
 
 #ダミーデータ作成用ツール:fakerをインストール
 gem "faker"
+
+#Hamlを使用するための高速テンプレートエンジン:hamlitをインストール
+gem "hamlit"
