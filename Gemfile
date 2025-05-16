@@ -44,6 +44,8 @@ gem "thruster", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+	#デバッグツール(デフォルトで導入) : binding.breakを書いた位置で処理が一時停止し、デバッグコンソールを開く
+	# => ターミナル上でコードの実行状況や変数の中身を確認できる
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -65,5 +67,5 @@ end
 
 gem "dartsass-rails", "~> 0.5.1"
 
-#fダミーデータ作成用ツール:fakerをインストール
+#ダミーデータ作成用ツール:fakerをインストール
 gem "faker"
