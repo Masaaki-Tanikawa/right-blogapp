@@ -82,3 +82,8 @@ gem 'hamlit'
 # モデルファイルのテーブル構造を自動でコメントしてくれるツール:annotateをインストール
 gem 'annotate'
 # rails g annotate:installでlib/tasks/auto_annotate_models.rake(annotateの設定ファイル)を作成 =>  rails db:migrateでコメントを自動入力
+
+#エラーページを見やすくする
+gem 'better_errors'
+gem 'binding_of_caller'
+# => raise StandardErrorで強制的にエラーを出せる
