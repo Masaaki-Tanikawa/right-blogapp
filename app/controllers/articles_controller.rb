@@ -3,6 +3,9 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [ :show, :edit, :update ] # show・edit・updateアクションの前に set_article メソッドを必ず実行する
   # DRY（Don’t Repeat Yourself）なコードを心がける！
 
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+	# 未ログイン状態で処理をできないようにする(ページの作成・更新・削除が対象)
+
   def index
     @articles = Article.all # Articleモデルのすべての記事を取得して@articles(複数取得するため@articleから変更)に代入(インスタンス化)する
   end
