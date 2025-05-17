@@ -87,3 +87,4 @@ gem 'annotate'
 gem 'better_errors'
 gem 'binding_of_caller'
 # => raise StandardErrorで強制的にエラーを出せる
+gem "devise", "~> 4.9"
