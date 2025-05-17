@@ -9,13 +9,13 @@
 #   end
 
 # ダミーデータを作成する
-Article.create({title:'タイトル1',content:'コンテンツ1'})
-Article.create({title:'タイトル2',content:'コンテンツ2'})
+Article.create({ title: 'タイトル1', content: 'コンテンツ1' })
+Article.create({ title: 'タイトル2', content: 'コンテンツ2' })
 
 # ダミーデータをfakerで作成する
 10.times do # 10記事作成
 Article.create(
-	title: Faker::Lorem.sentence(word_count:5), #タイトルは5文字
-	content: Faker::Lorem.sentence(word_count:100) #本文は100文字
+  title: Faker::Lorem.sentence(word_count: 5), # タイトルは5文字
+  content: Faker::Lorem.sentence(word_count: 100) # 本文は100文字
 )
 end

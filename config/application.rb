@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -10,7 +10,7 @@ module RightBlogapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     # config.load_defaults 8.0
-		config.load_defaults 7.2
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -25,6 +25,6 @@ module RightBlogapp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-		config.i18n.default_locale = :ja #デフォルト言語を日本語に設定する
+    config.i18n.default_locale = :ja # デフォルト言語を日本語に設定する
   end
 end
