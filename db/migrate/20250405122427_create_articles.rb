@@ -1,4 +1,4 @@
-class CreateArticles < ActiveRecord::Migration[8.0]
+class CreateArticles < ActiveRecord::Migration[7.2]
   def change
     create_table :articles do |t|
       t.string :title # データ型：カラム名,stringは短い文字列
