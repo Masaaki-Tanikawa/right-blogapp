@@ -7,6 +7,11 @@
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
   validates :title, presence: true # presence: trueで入力を必須にする
@@ -16,6 +21,8 @@ class Article < ApplicationRecord
   validates :content, presence: true
   validates :content, length: { minimum: 10 }
   validates :content, uniqueness: true	# uniqueness: で値を一意（ユニーク）に指定する(uniquenessはSNSアカウント・メールアドレスでも使用)
+
+	belongs_to :user #articleを1つのユーザーに紐づける
 
   def display_created_at
     I18n.l(self.created_at, format: :default) # 日付表示における冗長な部分を共通化
