@@ -15,11 +15,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new # 空のArticleインスタンスを作成する
+    @article = current_user.articles.build # 現在ログインしているユーザーのテーブルに記事を入れる箱を作る
   end
 
   def create
-    @article = Article.new(article_params) # @article(new.html.erb)に、article_paramsの情報を保存するための箱を作る
+    @article = current_user.articles.build(article_params) # @article(new.html.erb)に、article_paramsの情報を保存するための箱を作る
     if @article.save # データベースに値を保存する
       redirect_to article_path(@article), notice: '保存できました' # 記事詳細ページにジャンプする（「保存できました」と表示）
     else
