@@ -29,11 +29,11 @@ class ArticlesController < ApplicationController
   end
 
 def edit
-  # set_articleに処理が記述されているため、@article = Article.find(params[:id])を削除
+   @article = current_user.articles.find(params[:id]) # 現在ログインしているユーザーのArticlesテーブルから記事を探す(他のIDから記事を編集できないようにする)
 end
 
 def update
-  # set_articleに処理が記述されているため、@article = Article.find(params[:id])を削除
+  @article = current_user.articles.find(params[:id]) # 現在ログインしているユーザーのArticlesテーブルから記事を探す(他のIDから記事を編集できないようにする)
   if @article.update(article_params)
     redirect_to article_path(@article), notice: '更新できました' # 対象idの要素(titleと:content)を更新できたら、対象idの記事ページに移動
   else
@@ -43,7 +43,7 @@ def update
 end
 
 def destroy
-  article = Article.find(params[:id]) # 該当する記事IDの情報取得する(viewで表示しないため、@articleでなくてarticle)
+  article =  current_user.articles.find(params[:id]) # 現在ログインしているユーザーのArticlesテーブルから記事を削除する(他IDから記事を削除できないようにする)
   article.destroy! # destroyで削除、!で削除できなかった際に処理を停止（削除されないとアプリ側の原因のため）
   redirect_to root_path, status: :see_other, notice: '削除に成功しました' # 「削除に成功しました」と表示させ、一覧ページに戻る
 end
