@@ -3,10 +3,12 @@
   .article_detail
     = image_tag 'default-avatar.png'
     %div
-      %p cohki0305
+      / (ユーザー名が存在する場合、)ユーザー名にdisplay_name:メールアドレスの@以前を表示
+      - if @article.user.present?
+        %p= @article.user.display_name
       %p= @article.display_created_at
-      / 編集・削除ボタンをログイン時のみ表示させる
-      - if user_signed_in?
+      / 編集・削除ボタンをログイン時＋自分が書いた記事(記事のIDがログインしているユーザーのArticlesテーブルの中に存在する場合)のみ表示させる
+      - if user_signed_in? && current_user.articles.exists?(id: @article.id)
         .article_detail_actions
           .dropdown
             = image_tag 'actions.svg', class: 'dropbtn'
