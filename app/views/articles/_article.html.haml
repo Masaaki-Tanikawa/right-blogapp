@@ -10,7 +10,5 @@
       .card_detail
         = image_tag 'default-avatar.png'
         %div
-          / (ユーザー名が存在する場合、)ユーザー名にdisplay_name:メールアドレスの@以前を表示
-          - if article.user.present?
-            %p= article.user.display_name
+          %p= article.user.display_name
           %p= article.display_created_at

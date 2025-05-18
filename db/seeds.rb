@@ -8,13 +8,27 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# ダミーデータを作成する
-Article.create({ title: 'タイトル1', content: 'コンテンツ1' })
-Article.create({ title: 'タイトル2', content: 'コンテンツ2' })
+# ダミーアカウントを作成する
+john = User.find_or_create_by!(email: "john@example.com") do |user|
+  user.password = "password"
+  user.password_confirmation = "password"
+end
+emily = User.find_or_create_by!(email: "emily@example.com") do |user|
+  user.password = "password"
+  user.password_confirmation = "password"
+end
+# find_or_create_by!でユーザーの重複作成を防止して、繰り返しdb:seedが実行できる
 
-# ダミーデータをfakerで作成する
-10.times do # 10記事作成
-Article.create(
+
+# ダミー記事を各アカウントで5つ作成する
+5.times do
+john.articles.create(
+  title: Faker::Lorem.sentence(word_count: 5), # タイトルは5文字
+  content: Faker::Lorem.sentence(word_count: 100) # 本文は100文字
+)
+end
+5.times do
+emily.articles.create(
   title: Faker::Lorem.sentence(word_count: 5), # タイトルは5文字
   content: Faker::Lorem.sentence(word_count: 100) # 本文は100文字
 )
