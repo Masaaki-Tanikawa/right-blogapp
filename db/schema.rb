@@ -21,11 +21,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_140157) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "article_id", null: false
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,5 +41,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_140157) do
   end
 
   add_foreign_key "articles", "users"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "articles"
 end
