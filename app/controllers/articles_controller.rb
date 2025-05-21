@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    # set_articleに処理が記述されているため、@article = Article.find(params[:id])を削除
+    @comments = @article.comments # 記事のコメントを取得する
   end
 
   def new

@@ -18,4 +18,5 @@
 #
 class Comment < ApplicationRecord
   belongs_to :article  # コメントを1つの記事に紐づける
+  validates :content, presence: true # content:本文を必須とする
 end

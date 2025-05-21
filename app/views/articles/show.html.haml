@@ -19,6 +19,13 @@
   .article_heart
     = image_tag 'heart.svg'
 
+-# コメント一覧を表示
+.article
+  %h2 コメント一覧
+  - @comments.each do |comment|
+    .article_comment
+      %p= comment.content
+
 -# コメント投稿ボタンを実装
 .container
   = link_to new_article_comment_path(@article) do
