@@ -26,7 +26,8 @@ class Article < ApplicationRecord
   validates :content, length: { minimum: 10 }
   validates :content, uniqueness: true	# uniqueness: で値を一意（ユニーク）に指定する(uniquenessはSNSアカウント・メールアドレスでも使用)
 
-	belongs_to :user #articleを1つのユーザーに紐づける
+  has_many :comments, dependent: :destroy # 1つの記事に対して複数のコメントを紐づける(記事が削除されたらコメントも削除)
+  belongs_to :user # articleを1つのユーザーに紐づける
 
   def display_created_at
     I18n.l(self.created_at, format: :default) # 日付表示における冗長な部分を共通化
