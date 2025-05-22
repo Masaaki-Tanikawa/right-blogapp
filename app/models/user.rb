@@ -29,4 +29,9 @@ class User < ApplicationRecord
   def display_name
     self.email.split('@').first # メールアドレスの文字列を@で分割して、最初の要素(@以前)を取得
   end
+
+  # プロフィール情報の有無で、情報を呼び出すか・空の箱を作るかを使い分ける
+  def prepare_profile
+    profile || build_profile
+  end
 end
