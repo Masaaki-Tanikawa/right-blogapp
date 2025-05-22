@@ -5,5 +5,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @profile = current_user.build_profile  # プロフィールの内容を保存する空の箱を作る(has_oneの場合は,build_単数形のモデル名と入力)
   end
 end
