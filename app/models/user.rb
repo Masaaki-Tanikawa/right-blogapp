@@ -25,10 +25,23 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy # 1つのユーザーに対して複数の記事を紐づける(ユーザーが削除されたら記事も削除)
   has_one :profile, dependent: :destroy # 1つのユーザーに対して1つのプロフィールを紐づける(ユーザーが削除されたら記事も削除)
 
-  # アカウントIDを表示する値をつくる 例:メールアドレス:abc@gmail.com => アカウントIDはabc
+  # アカウントIDを表示する値をつくる
   def display_name
-    self.email.split('@').first # メールアドレスの文字列を@で分割して、最初の要素(@以前)を取得
+    profile&.nickname || self.email.split('@').first # Profileのnicknameを取得。nicknameがない・Profileが存在しない場合は、メールアドレスの@以前を取得
+    # オブジェクト&.メソッド:ぼっち演算子 => オブジェクトが存在しない(nil)の時はメソッドを実行しない
   end
+
+  delegate :birthday, :gender, :introduction, to: :profile, allow_nil: true
+  # ※delegateメソッドで以下の処理をまとめて実行
+  # def birthday
+  #   profile&.birthday
+  # end
+  # def gender
+  #   profile&.gender
+  # end
+  # def introduction
+  #   profile&.introduction
+  # end
 
   # プロフィール情報の有無で、情報を呼び出すか・空の箱を作るかを使い分ける
   def prepare_profile
