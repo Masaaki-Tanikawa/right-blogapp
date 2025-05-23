@@ -25,9 +25,10 @@
       / ユーザー表示をサインインしている場合に限定する
       - if user_signed_in?
         .dropdown
-          = image_tag 'default-avatar.png', class: 'header_avatar dropbtn'
+          = image_tag current_user.avatar_image, class: 'header_avatar dropbtn'
           .dropdown-content
-            %a{:href => "#"} プロフィール
+            / profileページ へ遷移 *rails/info/routesを参照
+            = link_to 'プロフィール', profile_path
             / ログアウト時の処理を実装
             = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }
       - else

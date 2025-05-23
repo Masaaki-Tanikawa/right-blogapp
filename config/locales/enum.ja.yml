@@ -1,0 +1,7 @@
+# app/models/profile.rbで定義したenum(genderのセレクトボックス値)の多言語化
+ja:
+  enum:
+    genders:
+      male: '男性'
+      female: '女性'
+      other: 'その他'
