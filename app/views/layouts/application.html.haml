@@ -25,7 +25,7 @@
       / ユーザー表示をサインインしている場合に限定する
       - if user_signed_in?
         .dropdown
-          = image_tag 'default-avatar.png', class: 'header_avatar dropbtn'
+          = image_tag current_user.avatar_image, class: 'header_avatar dropbtn'
           .dropdown-content
             / profileページ へ遷移 *rails/info/routesを参照
             = link_to 'プロフィール', profile_path

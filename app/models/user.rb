@@ -47,4 +47,12 @@ class User < ApplicationRecord
   def prepare_profile
     profile || build_profile
   end
+  # 画像アップロードの有無で、アップロード画像・デフォルト画像どちらかを表示するかを使い分ける
+  def avatar_image
+    if profile&.avatar&.attached? # 条件は、プロフィール・アバター両方が存在している状態でアップロードされていること
+      profile.avatar
+    else
+      'default-avatar.png'
+    end
+  end
 end
