@@ -16,7 +16,7 @@
     %div
       = f.label :gender, '性別'
     %div
-      = f.select :gender, Profile.genders.keys, {}, { class: 'text' } # 性別を入力するセレクトボックスを表示(app/models/profile.rb で設定したハッシュを取得)
+      = f.select :gender, Profile.genders.map { |k, v| [ I18n.t("enum.genders.#{k}"), k ] }, {}, { class: 'text' } # 性別を入力するセレクトボックスを表示(app/models/profile.rb で設定したハッシュを取得)+日本語対応するために配列を取得
     %div
       = f.label :birthday, '生年月日'
     %div
