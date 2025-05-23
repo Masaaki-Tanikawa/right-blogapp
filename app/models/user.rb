@@ -31,7 +31,7 @@ class User < ApplicationRecord
     # オブジェクト&.メソッド:ぼっち演算子 => オブジェクトが存在しない(nil)の時はメソッドを実行しない
   end
 
-  delegate :birthday, :gender, :introduction, to: :profile, allow_nil: true
+  delegate :birthday, :age, :gender, :introduction, to: :profile, allow_nil: true
   # ※delegateメソッドで以下の処理をまとめて実行
   # def birthday
   #   profile&.birthday
