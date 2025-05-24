@@ -24,7 +24,7 @@
     - else # いいねがなければ、POSTメソッドでいいねを投稿＋heart.svgを表示
       .article_heart
         = link_to article_like_path(@article), data: { turbo_method: 'post' } do
-          = image_tag 'heart.svg'Like
+          = image_tag 'heart.svg'
           -# article_like_path(@article)(*/rails/info/routesを参照)で対象の記事IDにいいねをポストする、デフォルトのGETメソッドをPOSTメソッドに変更
 
 -# コメント一覧を表示

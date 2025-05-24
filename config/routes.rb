@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
 
   resource :profile, only: [:show, :edit, :update] # profileのURLを作成: プロフィールの情報は一つのためresource、Likesテーブルにレコードを作るためcreateをそれぞれ使用
+
+  resources :favorites, only: [:index] # いいねした記事一覧ページ /favoritesのURLを作成
 end

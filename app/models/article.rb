@@ -34,6 +34,10 @@ class Article < ApplicationRecord
     I18n.l(self.created_at, format: :default) # 日付表示における冗長な部分を共通化
   end
 
+  def like_count # 記事のいいねをカウントする
+    likes.count
+  end
+
   # validate :validate_title_and_content_length # validateで、独自のルールを作る
   # private
   # def validate_title_and_content_length # タイトルと内容の合計は100文字未満の場合、エラーとする

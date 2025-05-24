@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy # 1つのユーザーに対して複数の記事を紐づける(ユーザーが削除されたら記事も削除)
   has_one :profile, dependent: :destroy # 1つのユーザーに対して1つのプロフィールを紐づける(ユーザーが削除されたら記事も削除)
   has_many :likes, dependent: :destroy # 1つのユーザーに対して複数のいいねを紐づける(ユーザーが削除されたらいいねも削除)
+	has_many :favorite_articles, through: :likes, source: :article # 中間テーブル:likesを通してArticleモデルを favorite_articles で取得。※source: :article:favorite_articlesはデータベースにないため、実際の関連先がarticleであることを明示
 
   # アカウントIDを表示する値をつくる
   def display_name
@@ -58,6 +59,6 @@ class User < ApplicationRecord
   end
 
   def has_liked?(article) # ユーザーが対象IDの記事に、いいねしているかどうかを判別する
-    likes.exists?(article_id: article.id) 
+    likes.exists?(article_id: article.id)
   end
 end

@@ -6,7 +6,7 @@
       .card_title= article.title
       .card_heart
         = image_tag 'heart.svg'
-        %span 23
+        %span= article.like_count # いいね数を動的に表示
       .card_detail
         = image_tag article.user.avatar_image # 記事を作成したユーザーのアバター画像を設定
         %div
