@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   has_many :articles, dependent: :destroy # 1つのユーザーに対して複数の記事を紐づける(ユーザーが削除されたら記事も削除)
   has_one :profile, dependent: :destroy # 1つのユーザーに対して1つのプロフィールを紐づける(ユーザーが削除されたら記事も削除)
+  has_many :likes, dependent: :destroy # 1つのユーザーに対して複数のいいねを紐づける(ユーザーが削除されたらいいねも削除)
 
   # アカウントIDを表示する値をつくる
   def display_name
