@@ -56,4 +56,8 @@ class User < ApplicationRecord
       'default-avatar.png'
     end
   end
+
+  def has_liked?(article) # ユーザーが対象IDの記事に、いいねしているかどうかを判別する
+    likes.exists?(article_id: article.id) 
+  end
 end

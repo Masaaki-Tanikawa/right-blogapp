@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # articlesのURLを作成する(全てのアクションが有効)
   resources :articles do
     resources :comments, only: [ :new, :create ] # articles/commentsのURLを作成(コメント投稿ページを追加するのみのため、new・createアクションに限定)
+    resource :like, only: [:create, :destroy ] # 記事に対していいねする：いいねの情報は記事に一つのためresourceを使用。※createでいいねをつけてdestroyでいいねを解除
   end
 
-  resource :profile, only: [:show, :edit, :update] # profileのURLを作成: プロフィールのは情報は一つのため、resourceを使用(idの指定不要・indexなし)
+  resource :profile, only: [:show, :edit, :update] # profileのURLを作成: プロフィールの情報は一つのためresource、Likesテーブルにレコードを作るためcreateをそれぞれ使用
 end
