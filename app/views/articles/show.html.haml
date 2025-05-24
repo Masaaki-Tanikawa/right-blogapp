@@ -1,4 +1,7 @@
 .article
+  - if @article.eyecatch.attached?
+    .article_image
+      = image_tag @article.eyecatch
   %h1.article_title= @article.title
   .article_detail
     = image_tag @article.user.avatar_image  # 記事を作成したユーザーのアバター画像を設定
@@ -16,8 +19,16 @@
               = link_to '削除する', article_path(@article), data: { turbo_method: 'delete', turbo_confirm: '本当に削除してもよろしいですか？' }
   .article_content
     = @article.content
-  .article_heart
-    = image_tag 'heart.svg'
+  - if user_signed_in? # ログインしている場合のみマークを表示・未ログインの場合はいいねできないため非表示
+    - if current_user.has_liked?(@article)  # いいねがあれば、heart-active.svgを表示
+      .article_heart
+        = link_to article_like_path(@article), data: { turbo_method: 'delete' } do
+          = image_tag 'heart-active.svg'
+    - else # いいねがなければ、POSTメソッドでいいねを投稿＋heart.svgを表示
+      .article_heart
+        = link_to article_like_path(@article), data: { turbo_method: 'post' } do
+          = image_tag 'heart.svg'
+          -# article_like_path(@article)(*/rails/info/routesを参照)で対象の記事IDにいいねをポストする、デフォルトのGETメソッドをPOSTメソッドに変更
 
 -# コメント一覧を表示
 .article

@@ -50,8 +50,8 @@ end
 
   private # Strong Parameterを書くときに入力
   def article_params
-    params.require(:article).permit(:title, :content) # フォームから投稿されたデータより、:titleと:contentの情報を抜き取る
-    # params:Strong Parameterのひとつで、データを変更されても保存しないようにする。:titleと:contentだけ保存を許可
+    params.require(:article).permit(:title, :content, :eyecatch) # フォームから投稿されたデータより、:titleと:contentと:eyecatchの情報を抜き取る
+    # params:Strong Parameterのひとつで、データを変更されても保存しないようにする。:titleと:contentと:eyecatchだけ保存を許可
   end
 
   def set_article
