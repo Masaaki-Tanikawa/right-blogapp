@@ -1,15 +1,3 @@
-/ プロフィールの表示ページを作成
-.container.profilePage
-  .profilePage_user
-    .profilePage_user_image
-      = image_tag current_user.avatar_image # ログインしているユーザーのアバター画像を設定
-    .profilePage_user_basicInfo
-      .profilePage_user_name
-        .profilePage_user_displayName
-          #{current_user.display_name}（#{current_user.age}・#{I18n.t("enum.genders.#{current_user.gender}")}）
-          / 現在ログインしているユーザーのニックネーム（年齢・性別）を表示
-        .profilePage_user_actionButton
-          = link_to 'Edit', edit_profile_path # /profile/editへ遷移 *rails/info/routesを参照
-      .profilePage_user_introduction
-        = current_user.introduction
-        / 現在ログインしているユーザーの紹介文を表示
+= render 'commons/profile', user: current_user
+-# app/views/commons/_profile.html.haml を読み込み・_profile.html.hamlのuserにはcurrent_userの値を使用
+-# ※ app/views/accounts/show.html.haml で同じデザインを使用するため、_profile.html.hamlで共通テンプレート化

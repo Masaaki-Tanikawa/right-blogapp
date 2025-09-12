@@ -68,10 +68,28 @@ class User < ApplicationRecord
   end
 
   def follow!(user) # 指定したユーザーをフォローする (!で例外を発生させる)
-    following_relationships.create!(following_id: user.id) # 新しいfollowing_relationshipsテーブルのレコードを作り、following_idにフォローした相手ユーザーのidを保存する(follower_idには自身のidが入る)
+    user_id = get_user_id(user)
+    following_relationships.create!(following_id: user_id) # 新しいfollowing_relationshipsテーブルのレコードを作り、following_idにフォローした相手ユーザーのidを保存する(follower_idには自身のidが入る)
   end
+
   def unfollow!(user) # 指定したフォローを解除する
-    relation = following_relationships.find_by!(following_id: user.id) # following_relationshipsテーブルから「自分(follower_id)が user(following_id) をフォローしている関係」を探す
+    user_id = get_user_id(user)
+    relation = following_relationships.find_by!(following_id: user_id) # following_relationshipsテーブルから「自分(follower_id)が user(following_id) をフォローしている関係」を探す
     relation.destroy! # 見つかった関係（フォロー情報）を削除する
+  end
+
+  def has_followed?(user) # フォローしているかどうかチェックする
+    following_relationships.exists?(following_id: user.id)
+  end
+  # *使用方法：current_user.has_followed?(following_id: user.id) => 現在のユーザーのフォローしているid(following_relationships)の中に対象のuserが存在しているかをチェック
+
+  private
+  # followメソッド・unfollowメソッドでしか使わないため、private内に設定
+  def get_user_id(user)
+    if user.is_a?(User) # userの値がUserクラスのインスタンスの場合はユーザーのidを取得して代入
+      user.id
+    else
+      user  # userの値がidの場合は、idの値をそのまま代入
+    end
   end
 end
