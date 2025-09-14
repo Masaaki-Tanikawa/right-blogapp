@@ -90,3 +90,6 @@ gem 'binding_of_caller'
 gem "devise", "~> 4.9"
 
 gem "trix-rails"
+
+# ビューのメソッドを（avatar_image(user)ではなく)user.avatar_imageで呼べるようにする
+gem 'active_decorator'

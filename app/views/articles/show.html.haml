@@ -4,7 +4,9 @@
       = image_tag @article.eyecatch
   %h1.article_title= @article.title
   .article_detail
-    = image_tag @article.user.avatar_image  # 記事を作成したユーザーのアバター画像を設定
+    -# 記事を作成したユーザーのアカウントページに遷移
+    = link_to account_path(@article.user) do
+      = image_tag @article.user.avatar_image # 記事を作成したユーザーのアバター画像を設定
     %div
       / ユーザー名にdisplay_name:メールアドレスの@以前を表示
       %p= @article.user.display_name

@@ -31,13 +31,6 @@ class Article < ApplicationRecord
   has_one_attached :eyecatch # アイキャッチ画像を（1つ）アップロード
   has_rich_text :content # contentの値をエディタで強化して保存(その後、既存のcontentを削除)
 
-  def display_created_at
-    I18n.l(self.created_at, format: :default) # 日付表示における冗長な部分を共通化
-  end
-
-  def like_count # 記事のいいねをカウントする
-    likes.count
-  end
 
   # validate :validate_title_and_content_length # validateで、独自のルールを作る
   # private

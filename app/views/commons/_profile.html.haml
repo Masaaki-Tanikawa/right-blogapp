@@ -1,0 +1,26 @@
+-# app/views/profiles/show.html.haml をカット＆ペースト (=> current_user を userに変更)
+-# ※app/views/profiles/show.html.hamlとapp/views/accounts/show.html.haml
+.container.profilePage
+  .profilePage_user
+    .profilePage_user_image
+      = image_tag user.avatar_image
+    .profilePage_user_basicInfo
+      .profilePage_user_name
+        .profilePage_user_displayName
+          #{user.display_name}（#{user.age || '？歳'}・#{I18n.t("enum.genders.#{user.gender || 'unknown'}")}）
+          -# #{user.age || '？歳'}：年齢が設定されていない時は？歳を表示、#{user.gender || 'unknown'}：性別が設定されていない時はunknown:性別未入力(config/locales/enum.ja.yml)を表示
+        .profilePage_user_actionButton
+          -# 現在のユーザーが自身のプロフィールページを開いている場合、プロフィール編集ボタンを表示
+          -# 現在のユーザーが他者のアカウントページを開いている場合、フォローボタンを表示
+          - if user == current_user
+            = link_to 'Edit', edit_profile_path # 遷移先はプロフィール編集ページ
+          - else
+            - if current_user&.has_followed?(user) # 現在のユーザーがフォローしているアカウントの場合はフォローを解除（&.でcurrent_userがnil(未ログイン)だったら実行しない）
+              = link_to 'Unfollow', account_unfollows_path(user), data: { turbo_method: 'post' }
+            - else
+              = link_to 'Follow', account_follows_path(user), data: { turbo_method: 'post' }  # 現在のユーザーがフォローしていないアカウントの場合はフォローを実行
+      .profilePage_user_introduction
+        = user.profile&.introduction
+
+  - user.articles.each do |article|
+    = render 'commons/article', article: article
