@@ -1,0 +1,6 @@
+.tabs
+  -# 現在のページのルートパスの設定に合わせてactiveクラスを付与
+  .tabs_item{class: "#{'active' if current_page?(root_path)}"}
+    = link_to '新着記事一覧', root_path
+  .tabs_item{class: "#{'active' if current_page?(timeline_path)}"}
+    = link_to 'タイムライン', timeline_path

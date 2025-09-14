@@ -17,4 +17,5 @@ Rails.application.routes.draw do
     resources :unfollows, only: [:create ] # unfollowの関係をcreateで作り、フォローを解除できるようにする
   end
 
+  resource :timeline, only: [:show]# タイムラインはユーザーにとって1つしかないためresource・一覧を表示させるだけのためonly: [:show]
 end
