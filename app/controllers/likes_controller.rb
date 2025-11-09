@@ -13,4 +13,12 @@ class LikesController < ApplicationController
     like.destroy! # データを削除する
     redirect_to article_path(article)
   end
+
+  # いいねしているかどうかをステータスとして管理する
+  def show
+    article = Article.find(params[:article_id]) # 記事のIDを取得
+    like_status = current_user.has_liked?(article) # いいねしているかどうかを取得
+    render json: { hasLiked: like_status } # いいねしているかどうかのデータをハッシュ(true/false)で返す (レスポンスがJSのためhasLiked)
+    # http://localhost:3000/articles/XX/like にアクセスすると、{"hasLiked":true(false)}が表示される
+  end
 end

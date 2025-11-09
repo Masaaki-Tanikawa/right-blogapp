@@ -1,4 +1,5 @@
-.article
+-# 記事ID#article-showをHTMLのdata属性として埋め込む(JavaScriptから参照できるように)
+.article#article-show{data: {article_id: @article.id}}
   - if @article.eyecatch.attached?
     .article_image
       = image_tag @article.eyecatch
