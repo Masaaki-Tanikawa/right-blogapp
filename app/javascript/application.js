@@ -4,7 +4,18 @@ import "controllers"
 import "trix"
 import "@rails/actiontext"
 
-//サーバーにいいね済みかを非同期で問い合わせ、結果をコンソールに出力する
+// いいね状態に応じてハートマークの表示を切り替える関数
+const handleHeartDisplay = (hasLiked) => {
+  // もし「いいね済み（hasLiked が true）」なら
+  if (hasLiked) {
+    // ハートマークを表示する
+    document.querySelector('.active-heart')?.classList.remove('hidden')
+  } else {
+    // ハートマークを非表示にする
+    document.querySelector('.inactive-heart')?.classList.remove('hidden')
+  }
+}
+//サーバーにいいね済みかを非同期で問い合わせ、ハートマークの表示を更新する
 document.addEventListener("turbo:load", () => {
   //app/views/articles/show.html.hamlの#article-showを取得
   const articleShow = document.getElementById("article-show")
@@ -26,12 +37,11 @@ document.addEventListener("turbo:load", () => {
     })
     // 正常にレスポンスが返ってきたときの処理
     .then((data) => {
-      console.log(data)
-			// http://localhost:3000/articles/XX のconsoleにアクセスすると、”[hasLiked":true(false)]”が表示される
+			// JSONデータの受信に成功したら、いいね状態を取得して表示を更新
+      handleHeartDisplay(data.hasLiked) // サーバーが返した { hasLiked: true/false } の値を使用
     })
     // 通信エラー（サーバーダウンやネットワークエラーなど）の処理
     .catch((error) => {
       console.error(error)
     })
 })
-
