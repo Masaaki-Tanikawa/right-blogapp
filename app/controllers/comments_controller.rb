@@ -4,6 +4,13 @@ class CommentsController < ApplicationController
     @comment = article.comments.build # コメントの内容を保存する空の箱を作る
   end
 
+  def index # コメントの内容をJSONで取得する
+    article = Article.find(params[:article_id]) # 対象となる記事をIDから取得
+    comments = article.comments # 対象となる記事のcomments取得
+    render json: comments.as_json(only: [:id, :content]) # 「id」と「content」カラムを含んだJSONを出力(as_json で取得する属性を選択)
+    # → http://localhost:3000/articles/XX/comments で 記事ごとのコメントID・内容がJSON形式で出力される
+  end
+
   def create # コメントをDBに保存する
     article = Article.find(params[:article_id]) # 対象となる記事をIDから取得
     @comment = article.comments.build(comment_params) # コメントの本文を取得

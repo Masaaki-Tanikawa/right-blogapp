@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # articlesのURLを作成する(全てのアクションが有効)
   resources :articles do
-    resources :comments, only: [ :new, :create ] # articles/commentsのURLを作成(コメント投稿ページを追加するのみのため、new・createアクションに限定)
+    resources :comments, only: [ :index, :new, :create ] # articles/commentsのURLを作成＋コメント一覧ページを追加
     resource :like, only: [:create, :destroy, :show] # 記事に対していいねする：いいねの情報は記事に一つのためresourceを使用。※createでいいねをつけてdestroyでいいねを解除＋showでいいねのステータス管理
   end
 

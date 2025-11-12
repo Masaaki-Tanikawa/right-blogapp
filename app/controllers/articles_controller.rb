@@ -10,8 +10,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all # Articleモデルのすべての記事を取得して@articles(複数取得するため@articleから変更)に代入(インスタンス化)する
   end
 
-  def show
-    @comments = @article.comments # 記事のコメントを取得する
+  def show # JavaScriptで一覧を表示させるため不要
   end
 
   def new

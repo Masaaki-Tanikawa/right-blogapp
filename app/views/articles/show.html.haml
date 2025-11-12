@@ -37,9 +37,8 @@
 -# コメント一覧を表示
 .article
   %h2 コメント一覧
-  - @comments.each do |comment|
-    .article_comment
-      %p= comment.content
+  -# Rubyではなく、JavaScriptで一覧を表示させる
+  .comments-container
 
 -# コメント投稿ボタンを実装
 .container
