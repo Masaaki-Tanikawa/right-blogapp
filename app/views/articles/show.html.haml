@@ -1,3 +1,6 @@
+-# 記事詳細ページの場合のみ"app/javascript/article.js"を読み込む (application.html.hamlの"yield :head"に挿入する)
+- content_for :head do
+  = javascript_import_module_tag "article"
 -# 記事ID#article-showをHTMLのdata属性として埋め込む(JavaScriptから参照できるように)
 .article#article-show{data: {article_id: @article.id}}
   - if @article.eyecatch.attached?
