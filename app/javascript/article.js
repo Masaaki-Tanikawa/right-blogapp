@@ -13,15 +13,17 @@ const handleHeartDisplay = (hasLiked) => {
     document.querySelector(".active-heart")?.classList.add("hidden"); // 「いいねしている」状態のハートを確実に隠すために追加
   }
 }
-//サーバーにいいね済みかを非同期で問い合わせ、ハートマークの表示を更新する
+
 document.addEventListener("turbo:load", () => {
   //app/views/articles/show.html.hamlの#article-showを取得
   const articleShow = document.getElementById("article-show")
-	if (!articleShow) return // 他のページでは処理をスキップ
+  if (!articleShow) return // 他のページでは処理をスキップ
   // #article-showのdata属性から記事IDを取得
   const articleId = articleShow.dataset.articleId
-	// CSRF対策トークンの値を取得(他サイトからの不正なリクエストを防ぐためのセキュリティ対策)
+  // CSRF対策トークンの値を取得(他サイトからの不正なリクエストを防ぐためのセキュリティ対策)
   const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+  //サーバーにいいね済みかを非同期で問い合わせ、ハートマークの表示を更新する
   // fetchでGETリクエストを送信
   fetch(`/articles/${articleId}/like`, {
     headers: {
@@ -31,11 +33,11 @@ document.addEventListener("turbo:load", () => {
     // サーバーからのレスポンスをJSONとして処理
     .then((response) => {
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
-      return response.json()
+      return response.json();
     })
     // 正常にレスポンスが返ってきたときの処理
     .then((data) => {
-			// JSONデータの受信に成功したら、いいね状態を取得して表示を更新
+      // JSONデータの受信に成功したら、いいね状態を取得して表示を更新
       handleHeartDisplay(data.hasLiked) // サーバーが返した { hasLiked: true/false } の値を使用
     })
     // 通信エラー（サーバーダウンやネットワークエラーなど）の処理
@@ -43,8 +45,8 @@ document.addEventListener("turbo:load", () => {
       console.error(error)
     })
   //「いいね」を押すためのクリックイベント
-  document.querySelector(".inactive-heart").addEventListener("click", () => {
-			// 「いいね」登録用のリクエストをサーバーに送る
+  document.querySelector(".inactive-heart")?.addEventListener("click", () => {
+      // 「いいね」登録用のリクエストをサーバーに送る
       fetch(`/articles/${articleId}/like`, {
         method: "POST",// HTTPメソッドはPOST
         headers: {
@@ -53,12 +55,12 @@ document.addEventListener("turbo:load", () => {
           Accept: "application/json",// サーバーからJSONで返してもらう
         },
       })
-				// サーバーからのレスポンスをJSONとして処理
+        // サーバーからのレスポンスをJSONとして処理
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP error ${response.status}`);
           return response.json();
         })
-				// サーバーからのJSONを受け取って処理
+        // サーバーからのJSONを受け取って処理
         .then((data) => {
           // サーバーが { status: "ok" } を返したら、いいねを表示する
           if (data.status === "ok") {
@@ -72,8 +74,8 @@ document.addEventListener("turbo:load", () => {
     });
 
   // 「いいね」を削除するためのクリックイベント
-  document.querySelector(".active-heart").addEventListener("click", () => {
-			// 「いいね」削除用のリクエストをサーバーに送る
+  document.querySelector(".active-heart")?.addEventListener("click", () => {
+      // 「いいね」削除用のリクエストをサーバーに送る
       fetch(`/articles/${articleId}/like`, {
         method: "DELETE",// HTTPメソッドはDELETE
         headers: {
@@ -81,14 +83,14 @@ document.addEventListener("turbo:load", () => {
           Accept: "application/json",// サーバーからJSONで返してもらう
         },
       })
-				// サーバーからのレスポンスをJSONとして処理
+        // サーバーからのレスポンスをJSONとして処理
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP error ${response.status}`);
           return response.json();
         })
-				// サーバーからのJSONを受け取って処理
+        // サーバーからのJSONを受け取って処理
         .then((data) => {
-					// サーバーが { status: "ok" } を返したら、いいねを非表示にする
+          // サーバーが { status: "ok" } を返したら、いいねを非表示にする
           if (data.status === "ok") {
             handleHeartDisplay(false);
           }
@@ -98,4 +100,34 @@ document.addEventListener("turbo:load", () => {
           console.error(error);
         });
     });
-})
+
+  // サーバーからコメント情報を取得して、一覧表示する
+  // fetchでGETリクエストを送信
+  fetch(`/articles/${articleId}/comments`, {
+    // method: "GET" は、省略して問題なし
+    headers: {
+      Accept: "application/json" // サーバーからJSONを受け取ることを明示
+      // "X-CSRF-Token": csrfToken,は、GETメソッドのため不要
+    }
+  })
+    // サーバーからのレスポンスをJSONとして処理
+    .then((response) => {
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+      return response.json();
+    })
+    // サーバーから受け取ったコメント情報を処理
+    .then((comments) => {
+      // 各コメントをループ処理してHTMLに追加
+      comments.forEach((comment) => {
+        // コメント内容をHTML要素として .comments-container に挿入
+        document.querySelector('.comments-container')?.insertAdjacentHTML(
+          'beforeend',// 要素の末尾に追加
+          `<div class="article_comment"><p>${comment.content}</p></div>`
+        )
+      })
+    })
+    // 通信エラー（サーバーダウンやネットワークエラーなど）の処理
+    .catch((error) => {
+      console.error(error)
+    })
+});
