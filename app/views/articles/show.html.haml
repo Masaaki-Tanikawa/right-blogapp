@@ -42,6 +42,12 @@
 
 -# コメント投稿ボタンを実装
 .container
-  = link_to new_article_comment_path(@article) do
-    .btn-secondary
+  -# フォームを開く用の「コメントを追加」ボタンを実装(show-comment-formクラスでフォームの開閉)
+  .btn-secondary.show-comment-form
+    コメントを追加
+  -# コメント入力フォームを実装(hiddenクラスでトグル開閉・初期値は空白('')・サイズをsmクラスで調整)
+  .comment-text-area.hidden
+    = text_area_tag :comment_content, '', class: 'sm'
+    -# コメント送信用の「コメントを追加」ボタンを実装(add-comment-buttonクラスで入力内容の送信)
+    .btn-secondary.add-comment-button
       コメントを追加

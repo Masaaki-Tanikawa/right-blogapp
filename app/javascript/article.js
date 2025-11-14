@@ -1,5 +1,3 @@
-// 「いいねの表示切り替え」に関する処理を"app/javascript/application.js"から移す
-
 // いいね状態に応じてハートマークの表示を切り替える関数
 const handleHeartDisplay = (hasLiked) => {
   // もし「いいね済み（hasLiked が true）」なら
@@ -13,15 +11,32 @@ const handleHeartDisplay = (hasLiked) => {
     document.querySelector(".active-heart")?.classList.add("hidden"); // 「いいねしている」状態のハートを確実に隠すために追加
   }
 }
-
+// 「コメントを追加」ボタンで入力フォームを開く関数
+const handleCommentForm = () => {
+	document.querySelectorAll('.show-comment-form').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('hidden')
+      document.querySelector('.comment-text-area')?.classList.remove('hidden') //.comment-text-areaが存在しないときにエラーを出さないようにする
+    })
+  })
+}
+// 「コメント一覧」にコメントを追加する関数
+const appendNewComment = (comment) => {
+		// コメント内容をHTML要素として .comments-container に挿入
+		document.querySelector('.comments-container')?.insertAdjacentHTML(
+			'beforeend',// 要素の末尾に追加
+			`<div class="article_comment"><p>${comment.content}</p></div>`
+		)
+}
+// ページがロードされたときに実行する処理を記述
 document.addEventListener("turbo:load", () => {
-  //app/views/articles/show.html.hamlの#article-showを取得
+  // 記事詳細ページの#article-showを取得
   const articleShow = document.getElementById("article-show")
   if (!articleShow) return // 他のページでは処理をスキップ
   // #article-showのdata属性から記事IDを取得
   const articleId = articleShow.dataset.articleId
   // CSRF対策トークンの値を取得(他サイトからの不正なリクエストを防ぐためのセキュリティ対策)
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content'); // ?.getAttribute():metaタグが無いページでエラーを出さないようにする
 
   //サーバーにいいね済みかを非同期で問い合わせ、ハートマークの表示を更新する
   // fetchでGETリクエストを送信
@@ -119,15 +134,56 @@ document.addEventListener("turbo:load", () => {
     .then((comments) => {
       // 各コメントをループ処理してHTMLに追加
       comments.forEach((comment) => {
-        // コメント内容をHTML要素として .comments-container に挿入
-        document.querySelector('.comments-container')?.insertAdjacentHTML(
-          'beforeend',// 要素の末尾に追加
-          `<div class="article_comment"><p>${comment.content}</p></div>`
-        )
+				// コメントを一覧に追加する関数を実行
+				appendNewComment(comment)
       })
     })
     // 通信エラー（サーバーダウンやネットワークエラーなど）の処理
     .catch((error) => {
       console.error(error)
     })
+
+  // コメント入力フォームを表示させる関数を実行
+	handleCommentForm()
+
+  // 「コメントを追加」ボタンを押して、フォームに入力したコメントを送信する
+  document.querySelector('.add-comment-button')?.addEventListener('click', () => {
+      // コメント入力欄の値を取得
+      const content = document.getElementById('comment_content').value;
+      // コメントに値がない場合、アラート表示
+      if (!content) {
+        window.alert('コメントを入力してください');
+        return;
+      }
+      // コメント登録用のリクエストをサーバーに送る
+      fetch(`/articles/${articleId}/comments`, {
+        method: "POST",// HTTPメソッドはPOST
+        headers: {
+          "X-CSRF-Token": csrfToken,// CSRF対策トークンを送信
+          "Content-Type": "application/json",// リクエストボディがJSONであることを明示
+          Accept: "application/json",// サーバーからJSONで返してもらう
+        },
+        // JavaScriptのオブジェクトをJSON文字列に変換
+        body: JSON.stringify({
+          comment: { content: content } // {comment: { content: "入力したコメント" }} をJSONで渡す
+        }),
+      })
+        // サーバーからのレスポンスをJSONとして処理
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+          return response.json();
+        })
+        // サーバーから受け取ったコメント情報を処理
+        .then((comment) => {
+					// コメントを一覧に追加する関数を実行
+					appendNewComment(comment)
+          // コメント入力フォームをリセット
+          document.getElementById('comment_content').value = '';
+        })
+        // 通信エラー（サーバーダウンやネットワークエラーなど）の処理
+        .catch((error) => {
+          console.error(error)
+        })
+    });
+
 });
