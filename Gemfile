@@ -63,6 +63,9 @@ group :development do
   gem 'haml-rails'     # Rakeタスク haml:replace_erbs を提供
   gem 'html2haml'      # ERB → HAML 変換に必要
   # ターミナルで、bundle exec rake haml:erb2hamlを実行すると、erbのファイルをもとにhamlを一括で作成できる
+	gem 'letter_opener' # 送信メールを確認しやすくする
+	gem 'letter_opener_web', '~> 3.0' # 送信メールの一覧などをブラウザで確認できる
+
 end
 
 group :test do

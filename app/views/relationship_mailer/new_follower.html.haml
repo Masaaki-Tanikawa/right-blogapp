@@ -1,0 +1,7 @@
+// app/mailers/relationship_mailer.rb を実行した際のメールテンプレートを作成
+%p #{@user.email} さん
+%p 以下のユーザにフォローされました。
+= link_to 'プロフィールを確認する', account_url(@follower) # フォロワーのURLのリンクを表示
+
+
+
