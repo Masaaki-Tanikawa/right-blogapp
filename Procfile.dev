@@ -1,2 +1,5 @@
 web: bin/rails server -p 3000
 css: bin/rails dartsass:watch
+# redisとsidekiqをrailsサーバーと同時に立ち上げ
+sidekiq: bundle exec sidekiq -C config/sidekiq.yml
+redis: redis-server
