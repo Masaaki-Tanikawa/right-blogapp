@@ -28,6 +28,6 @@ class Relationship < ApplicationRecord
   private
   def send_email
     # after_createで取得したRelationshipモデルの情報をもとに、new_followerメソッドを実行
-    RelationshipMailer.new_follower(following, follower).deliver_now
+    RelationshipMailer.new_follower(following, follower).deliver_later # .deliver_now(今すぐ)から.deliver_later(非同期処理)に変更
   end
 end
