@@ -26,5 +26,6 @@ module RightBlogapp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.i18n.default_locale = :ja # デフォルト言語を日本語に設定する
+		config.active_job.queue_adapter = :sidekiq # active_jobにSidekiqを指定
   end
 end

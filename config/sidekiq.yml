@@ -1,0 +1,5 @@
+# Sidekiqの設定を記録
+:concurrency: 1
+:queues:
+  - default
+  - mailers

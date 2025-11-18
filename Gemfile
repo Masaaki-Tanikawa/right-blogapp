@@ -96,3 +96,6 @@ gem "trix-rails"
 
 # ビューのメソッドを（avatar_image(user)ではなく)user.avatar_imageで呼べるようにする
 gem 'active_decorator'
+
+# サーバー側で非同期処理を行う
+gem 'sidekiq'

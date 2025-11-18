@@ -1,6 +1,10 @@
+require 'sidekiq/web' # SidekiqのUI画面をRailsに読み込む
+
 Rails.application.routes.draw do
   # 開発環境のみ../letter_openerでletter_openerの内容を確認できるようにする
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+	# SidekiqのUI画面でjoqやqueuesの状況を確認できるようにする
+	mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
 
   devise_for :users
   # 記事一覧だとわかるようにテーブル名をarticlesとする
