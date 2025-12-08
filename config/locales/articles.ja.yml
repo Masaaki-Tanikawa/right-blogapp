@@ -1,0 +1,4 @@
+# article関連の日本語設定を管理する
+ja:
+  articles:
+    comment_list: 'コメント一覧'

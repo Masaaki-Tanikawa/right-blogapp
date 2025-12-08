@@ -36,7 +36,8 @@
 
 -# コメント一覧を表示
 .article
-  %h2 コメント一覧
+  -# 「コメント一覧」を多言語表示する(config/locales/articles.XX.ymlを読み込み)
+  %h2= I18n.t('articles.comment_list')
   -# Rubyではなく、JavaScriptで一覧を表示させる
   .comments-container
 

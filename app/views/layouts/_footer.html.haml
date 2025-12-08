@@ -1,0 +1,8 @@
+-# フッターに言語切り替えボタンを実装する
+%footer.footer-container
+  -# 言語設定が英語の場合は、日本語のパラメータに切り替えるボタン（locale=jaを付け替えたURLを生成）を表示
+  - if I18n.locale == :en
+    = link_to '日本語', url_for(locale: :ja)
+    -# 言語設定が日本語の場合は、英語のパラメータに切り替えるボタン（locale=enを付け替えたURLを生成）を表示
+  - else
+    = link_to 'English', url_for(locale: :en)
