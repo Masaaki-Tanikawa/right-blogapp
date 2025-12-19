@@ -12,10 +12,10 @@ const handleHeartDisplay = (hasLiked) => {
 // article.jsから受け取った「記事ID」と「CSRFトークン」で、いいね切り替えの処理を実行する
 // ※ exportで関数や変数を外部ファイルで使えるようにする(article.js内のコードをそのまま移動)
 export const initLikes = (articleId, csrfToken) => {
-	
+
 	//サーバーにいいね済みかを非同期で問い合わせ、ハートマークの表示を更新する
 	// fetchでGETリクエストを送信
-	fetch(`/articles/${articleId}/like`, {
+	fetch(`/api/articles/${articleId}/like`, { // URLを/api/...に更新
 		headers: {
 			Accept: "application/json"
 		}
@@ -38,7 +38,7 @@ export const initLikes = (articleId, csrfToken) => {
 	//「いいね」を押すためのクリックイベント
 	document.querySelector(".inactive-heart")?.addEventListener("click", () => {
 		// 「いいね」登録用のリクエストをサーバーに送る
-		fetch(`/articles/${articleId}/like`, {
+		fetch(`/api/articles/${articleId}/like`, { // URLを/api/...に更新
 			method: "POST",// HTTPメソッドはPOST
 			headers: {
 				"X-CSRF-Token": csrfToken,// CSRF対策トークンを送信
@@ -67,7 +67,7 @@ export const initLikes = (articleId, csrfToken) => {
 	// 「いいね」を削除するためのクリックイベント
 	document.querySelector(".active-heart")?.addEventListener("click", () => {
 		// 「いいね」削除用のリクエストをサーバーに送る
-		fetch(`/articles/${articleId}/like`, {
+		fetch(`/api/articles/${articleId}/like`, {
 			method: "DELETE",// HTTPメソッドはDELETE
 			headers: {
 				"X-CSRF-Token": csrfToken,// CSRF対策トークンを送信

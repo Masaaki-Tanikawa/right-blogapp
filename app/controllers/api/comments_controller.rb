@@ -1,4 +1,5 @@
-class CommentsController < ApplicationController
+# app/controllers/comments_controller.rb → app/controllers/api/comments_controller.rb
+class Api::CommentsController < Api::ApplicationController # namespace（名前空間）Api::をつけて、API専用コントローラであることを明示
   def new # コメント入力フォームを表示する
     article = Article.find(params[:article_id]) # 対象となる記事をIDから取得
     @comment = article.comments.build # コメントの内容を保存する空の箱を作る

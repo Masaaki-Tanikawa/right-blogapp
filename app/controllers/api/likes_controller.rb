@@ -1,4 +1,5 @@
-class LikesController < ApplicationController
+# app/controllers/likes_controller.rb → app/controllers/api/likes_controller.rb
+class Api::LikesController < Api::ApplicationController # namespace（名前空間）Api::をつけて、API専用コントローラであることを明示
   before_action :authenticate_user!
 
   def create # いいねをつける

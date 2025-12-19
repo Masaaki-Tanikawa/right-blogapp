@@ -19,7 +19,7 @@ const appendNewComment = (comment) => {
 // ※ exportで関数や変数を外部ファイルで使えるようにする(article.js内のコードをそのまま移動)
 export const initComments = (articleId, csrfToken) => {
 	// fetchでGETリクエストを送信
-	fetch(`/articles/${articleId}/comments`, {
+	fetch(`/api/articles/${articleId}/comments`, { // URLを/api/...に更新
 		// method: "GET" は、省略して問題なし
 		headers: {
 			Accept: "application/json" // サーバーからJSONを受け取ることを明示
@@ -57,7 +57,7 @@ export const initComments = (articleId, csrfToken) => {
 			return;
 		}
 		// コメント登録用のリクエストをサーバーに送る
-		fetch(`/articles/${articleId}/comments`, {
+		fetch(`/api/articles/${articleId}/comments`, { // URLを/api/...に更新
 			method: "POST",// HTTPメソッドはPOST
 			headers: {
 				"X-CSRF-Token": csrfToken,// CSRF対策トークンを送信
