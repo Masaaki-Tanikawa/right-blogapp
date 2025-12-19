@@ -1,5 +1,6 @@
-class ProfilesController < ApplicationController
-  before_action :authenticate_user! # ログインしていないと実行できないようにする
+# app/controllers/profiles_controller.rb → app/controllers/apps/profiles_controller.rb
+class Apps::ProfilesController < Apps::ApplicationController
+  # before_actionを削除
   def show
     @profile = current_user.profile # profileの値を取得する（profile:user.rbで紐付けた値）
   end
