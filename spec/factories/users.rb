@@ -1,0 +1,7 @@
+# userモデルのemailとpasswordに値を入れてダミーデータを作る
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password { 'password' }
+  end
+end

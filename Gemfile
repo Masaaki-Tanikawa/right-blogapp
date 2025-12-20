@@ -57,6 +57,8 @@ group :development, :test do
 
 	# テスト用ライブラリRSpecを導入
 	gem 'rspec-rails'
+	# テスト用ダミーデータ作成ライブラリfactory_botを導入
+	gem 'factory_bot_rails'
 end
 
 group :development do
