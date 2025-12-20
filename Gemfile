@@ -54,6 +54,11 @@ group :development, :test do
   gem 'rubocop-rails-omakase', require: false
   # 文法チェックツール(デフォルトで導入) : .rubocop.ymlのルールに従って、文法のエラーを検出・修正してくれる
   # => bundle exec rubocopで検出・rubocop -aで一括修正
+
+	# テスト用ライブラリRSpecを導入
+	gem 'rspec-rails'
+	# テスト用ダミーデータ作成ライブラリfactory_botを導入
+	gem 'factory_bot_rails'
 end
 
 group :development do
