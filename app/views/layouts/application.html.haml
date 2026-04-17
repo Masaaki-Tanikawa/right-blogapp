@@ -6,7 +6,7 @@
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
     %meta{:content => "yes", :name => "mobile-web-app-capable"}/
-    = csrf_meta_tags
+    = csrf_meta_tags # CSRFトークンをHTMLに埋め込む（form_withやJS通信時に自動で送信される）
     = csp_meta_tag
     = yield :head
     %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
