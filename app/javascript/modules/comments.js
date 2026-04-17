@@ -9,10 +9,15 @@ const handleCommentForm = () => {
 }
 // 「コメント一覧」にコメントを追加する関数(article.js内のコードをそのまま移動)
 const appendNewComment = (comment) => {
-	document.querySelector('.comments-container')?.insertAdjacentHTML(
-		'beforeend',
-		`<div class="article_comment"><p>${comment.content}</p></div>`
-	)
+	// XSS対策：HTMLの命令ではなくただの文字として認識させる
+	const container = document.querySelector('.comments-container')
+	if (!container) return
+	const div = document.createElement('div')
+	div.className = 'article_comment'
+	const p = document.createElement('p')
+	p.textContent = comment.content
+	div.appendChild(p)
+	container.appendChild(div)
 }
 
 // article.jsから受け取った「記事ID」と「CSRFトークン」で、コメント入力・表示の処理を実行する
