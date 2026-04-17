@@ -19,7 +19,6 @@ emily = User.find_or_create_by!(email: "emily@example.com") do |user|
 end
 # find_or_create_by!でユーザーの重複作成を防止して、繰り返しdb:seedが実行できる
 
-
 # ダミー記事を各アカウントで5つ作成する
 5.times do
 john.articles.create(

@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Article', type: :system do
-
   # ダミーのユーザー・記事を作成
   let!(:user) { create(:user) }
   let!(:articles) { create_list(:article, 3, user: user) }

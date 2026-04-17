@@ -32,8 +32,6 @@ class User < ApplicationRecord
   has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship', dependent: :destroy  # 自分をフォローしている関係をつくる => Relationshipsテーブルの中で following_id に自分のidが入っているレコードを集める
   has_many :followers, through: :follower_relationships, source: :follower  # 自分をフォローしているユーザーの一覧 => 中間テーブル:follower_relationshipsを通してfollower（相手ユーザー）の情報を取得
 
-
-
   delegate :birthday, :age, :gender, :introduction, to: :profile, allow_nil: true
   # ※delegateメソッドで以下の処理をまとめて実行
   # def birthday

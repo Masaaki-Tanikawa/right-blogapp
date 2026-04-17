@@ -18,7 +18,7 @@
 #  follower_id   (follower_id => users.id)
 #  following_id  (following_id => users.id)
 #
-require "test_helper"
+require 'test_helper'
 
 class RelationshipTest < ActiveSupport::TestCase
   # test "the truth" do

@@ -4,5 +4,4 @@ class Apps::FavoritesController < Apps::ApplicationController
   def index
     @articles = current_user.favorite_articles # 現在ログインしたユーザーがいいねした記事を全て取得
   end
-
 end
