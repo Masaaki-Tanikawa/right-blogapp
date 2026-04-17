@@ -8,7 +8,7 @@ class Api::LikesController < Api::ApplicationController # namespace（名前空�
     render json: { status: 'ok' } # 「記事URLに戻る」から「JSONデータ{ "status": "ok" }を返す」に変更
   end
 
-	def destroy # いいねを消去する
+  def destroy # いいねを消去する
     article = Article.find(params[:article_id])
     like = article.likes.find_by!(user_id: current_user.id) # 対象記事の中から、ログイン中のユーザーが実施したいいねを取得する ※ユーザーは必ず存在する・エラーが起こり得ないため！をつける
     like.destroy! # データを削除する

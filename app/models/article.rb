@@ -31,7 +31,6 @@ class Article < ApplicationRecord
   has_one_attached :eyecatch # アイキャッチ画像を（1つ）アップロード
   has_rich_text :content # contentの値をエディタで強化して保存(その後、既存のcontentを削除)
 
-
   # validate :validate_title_and_content_length # validateで、独自のルールを作る
   # private
   # def validate_title_and_content_length # タイトルと内容の合計は100文字未満の場合、エラーとする

@@ -39,7 +39,7 @@ gem 'kamal', require: false
 gem 'thruster', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -55,10 +55,10 @@ group :development, :test do
   # 文法チェックツール(デフォルトで導入) : .rubocop.ymlのルールに従って、文法のエラーを検出・修正してくれる
   # => bundle exec rubocopで検出・rubocop -aで一括修正
 
-	# テスト用ライブラリRSpecを導入
-	gem 'rspec-rails'
-	# テスト用ダミーデータ作成ライブラリfactory_botを導入
-	gem 'factory_bot_rails'
+  # テスト用ライブラリRSpecを導入
+  gem 'rspec-rails'
+  # テスト用ダミーデータ作成ライブラリfactory_botを導入
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -68,9 +68,8 @@ group :development do
   gem 'haml-rails'     # Rakeタスク haml:replace_erbs を提供
   gem 'html2haml'      # ERB → HAML 変換に必要
   # ターミナルで、bundle exec rake haml:erb2hamlを実行すると、erbのファイルをもとにhamlを一括で作成できる
-	gem 'letter_opener' # 送信メールを確認しやすくする
-	gem 'letter_opener_web', '~> 3.0' # 送信メールの一覧などをブラウザで確認できる
-
+  gem 'letter_opener' # 送信メールを確認しやすくする
+  gem 'letter_opener_web', '~> 3.0' # 送信メールの一覧などをブラウザで確認できる
 end
 
 group :test do
@@ -91,13 +90,13 @@ gem 'hamlit'
 gem 'annotate'
 # rails g annotate:installでlib/tasks/auto_annotate_models.rake(annotateの設定ファイル)を作成 =>  rails db:migrateでコメントを自動入力
 
-#エラーページを見やすくする
+# エラーページを見やすくする
 gem 'better_errors'
 gem 'binding_of_caller'
 # => raise StandardErrorで強制的にエラーを出せる
-gem "devise", "~> 4.9"
+gem 'devise', '~> 4.9'
 
-gem "trix-rails"
+gem 'trix-rails'
 
 # ビューのメソッドを（avatar_image(user)ではなく)user.avatar_imageで呼べるようにする
 gem 'active_decorator'

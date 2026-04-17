@@ -26,7 +26,7 @@ RSpec.describe 'Articles', type: :request do
         # 記事作成用のパラメータを生成する
         article_params = attributes_for(:article) # FactoryBotのattributes_forで、リクエストで送る値（ハッシュ）を作る
         # articleのパラメータを付けて POST リクエストを送信する
-        post articles_path({article: article_params})
+        post articles_path({ article: article_params })
         # 保存後にリダイレクトされるため、HTTPステータスが302であることを確認
         expect(response).to have_http_status(302)
 
@@ -43,7 +43,7 @@ RSpec.describe 'Articles', type: :request do
     it 'ログイン画面に遷移する' do
       # articleのパラメータを生成して、POSTリクエストを送信する
       article_params = attributes_for(:article)
-      post articles_path({article: article_params})
+      post articles_path({ article: article_params })
       # ログインのパスにリダイレクトされる
       expect(response).to redirect_to(new_user_session_path)
     end
